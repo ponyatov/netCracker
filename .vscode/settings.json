@@ -1,0 +1,53 @@
+{
+  // \ py
+  "python.pythonPath"              : "./bin/python3",
+  "python.formatting.provider"     : "autopep8",
+  "python.formatting.autopep8Path" : "./bin/autopep8",
+  "python.formatting.autopep8Args" : ["--ignore=E26,E302,E305,E401,E402,E701,E702"],
+  // / py
+
+  // \ multi: hotkey bindings
+  "multiCommand.commands": [
+    {
+      "command": "multiCommand.f11",
+      "sequence": [
+        "workbench.action.files.saveAll",
+        {"command": "workbench.action.terminal.sendSequence",
+          "args": {"text": "\u000D make meta \u000D"}}
+      ]
+    },
+    {
+      "command": "multiCommand.f12",
+      "sequence": [
+        "workbench.action.files.saveAll",
+        {"command": "workbench.action.terminal.sendSequence",
+          "args": {"text": "\u000D make all \u000D"}}
+      ]
+    },
+  ],
+  // / multi: hotkey bindings
+
+  // \ files
+  // exclude files from left-side IDE view
+  "files.exclude": {
+    "**/docs/**":true,
+    "**/netCracker/**":true,
+    "*.pyc":true, "pyvenv.cfg":true,
+    "**/.cache/**":true, "**/__pycache__/**":true,
+  },
+  // disable file changes watch (count is limited by OS and slows down refresh)
+  "files.watcherExclude": {
+  },
+  // associate file types with syntax highlight & editor plugins
+  "files.associations": {
+  },
+  // / files
+
+  // \ editor: tunings
+  "editor.tabSize": 4,
+  "editor.rulers": [80],
+  "workbench.tree.indent": 32,
+  // / editor: tunings
+
+  "browser-preview.startUrl": "127.0.0.1:12345/"
+}
