@@ -79,8 +79,8 @@ public class Task {
 
   /** * @param title task value, non-empty, limited with 99 chars max */
   public void setTitle(String title) {
-    assert (title.length() > 0); // non-empty
-    assert (title.length() < 99); // too long
+    if (!(title.length() > 0)) new NoValid(this, "setTitle(title>0)");
+    if (!(title.length() < 99)) new NoValid(this, "setTitle(title<99)");
     this.title = title;
   }
 
@@ -115,11 +115,12 @@ public class Task {
    * @param time notification time, seconds
    */
   public void setTime(int time) {
-    assert (time > 0);
+    if (!(time >= 0)) new NoValid(this, "setTime(time>=0)");
     this.periodic = false;
     this.start = time;
     this.end = this.start;
     this.repeat = 0;
+    if (time == 0) this.active = false;
   }
 
   /**
@@ -130,11 +131,14 @@ public class Task {
    * @param repeat task repeat interval, seconds
    */
   public void setTime(int start, int end, int repeat) {
-    assert (start > 0 && end >= start && repeat > 0);
+    if (!(start >= 0)) new NoValid(this, "setTime(start >= 0)");
+    if (!(end >= start)) new NoValid(this, "setTime(end >= start)");
+    if (!(repeat > 0)) new NoValid(this, "setTime(repeat > 0)");
     this.periodic = true;
     this.start = start;
     this.end = end;
     this.repeat = repeat;
+    if (start == 0) this.active = false;
   }
 
   /** @return {@link #start} */
